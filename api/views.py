@@ -4,7 +4,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from api.models import User, Task
-from api.serializers import UserSerializer, TaskSerializer
+from api.serializers import UserSerializer, TaskSerializer, StateTaskSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -41,7 +41,8 @@ class TaskViewSet(viewsets.ModelViewSet):
     @action(detail=False,
             methods=['get'])
     def states(self, request):
-        return Response(Task.STATE_OPTIONS)
+        serializer = StateTaskSerializer(Task.STATE_OPTIONS)
+        return Response(serializer.data)
 
     queryset = Task.objects.all().order_by('description')
     serializer_class = TaskSerializer

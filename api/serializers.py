@@ -19,3 +19,14 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ['id', 'user', 'description', 'state']
+
+
+class StateTaskSerializer(serializers.BaseSerializer):
+    """
+    Class responsable for serializing the states
+    """
+    def to_representation(self, data):
+        states = []
+        for item in data:
+            states.append({"value": item[0], "label": item[1]})
+        return states
