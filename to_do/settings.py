@@ -135,6 +135,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
-CORS_ORIGIN_WHITELIST = (
-    'https://to-do-api-alessandro.herokuapp.com',
-)
+#CORS_ORIGIN_WHITELIST = (
+#    'https://to-do-api-alessandro.herokuapp.com',
+#)
+CORS_ORIGIN_ALLOW_ALL = True
