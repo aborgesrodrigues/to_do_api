@@ -19,7 +19,7 @@ class Task(models.Model):
 	"""
 	STATE_OPTIONS = (('to_do','To do'),('done','Done'))
 
-	user = models.ForeignKey(User, verbose_name=u"User")
+	user = models.ForeignKey(User, verbose_name=u"User", on_delete=models.CASCADE())
 	description = models.CharField(max_length=255, verbose_name="description")
 	state = models.CharField(max_length=10, choices=STATE_OPTIONS)
 
