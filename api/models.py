@@ -17,9 +17,11 @@ class Task(models.Model):
 	"""
 	Class to persist User Task data
 	"""
+	STATE_OPTIONS = (('to_do','To do'),('done','Done'))
+
 	user = models.ForeignKey(User, verbose_name=u"User", on_delete=models.PROTECT)
 	description = models.CharField(max_length=255, verbose_name="description")
-	state = models.CharField(max_length=10, choices=(('to_do','To do'),('done','Done')))
+	state = models.CharField(max_length=10, choices=STATE_OPTIONS)
 
 	def __str__(self):
 		return "%s - %s" % (self.description, self.user)
