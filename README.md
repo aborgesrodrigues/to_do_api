@@ -18,19 +18,22 @@ This api allows create users and tasks. The api contains the follow endpoints.
     - DELETE method -> delete the task
 - /tasks/user/<id_user>
     - GET method -> list all tasks of a user
+    
+    
+## Building
 
-Requirements
-============
+It is needed the python3 library installed.
 
-To run this api code, you'll need to install the following libraries:
+It is best to use the python `virtualenv` tool to build locally:
 
-- django
-- djangorestframework
-- djangorestframework-jwt
-- gunicorn
-- django-heroku #this library is needed only if you wil deploy on heroku
-- django-cors-headers
+```sh
+$ sudo apt-get install python3.6
+$ sudo apt-get install virtualenv
+$ sudo apt-get install python3-pip
+$ virtualenv venv -p python3
+$ source venv/bin/activate
+$ pip3 install -r requirements.txt
+$ python manage.py runserver
+```
 
-You can install these with the following command:
-
-    pip install -r requirements.txt
+Then visit `http://localhost:8000` to view the app. 
