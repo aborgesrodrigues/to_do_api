@@ -1,6 +1,9 @@
-django
-djangorestframework
-djangorestframework-jwt
-gunicorn
-django-heroku
-django-cors-headers
+Django==3.0
+djangorestframework==3.10.3
+djangorestframework-jwt==1.11.0
+django-cors-headers==3.2.0
+django-rest-swagger==2.2.0
+
+#Heroku libraries
+#gunicorn
+#django-heroku
