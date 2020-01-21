@@ -39,10 +39,10 @@ class UserTest(TestCase):
         # get API response
         client = Client()
         response = client.put("/users/1/", data={"name":"Alessandro Borges"})
-        # get data from db
-        user = User.objects.get(pk=1)
-        serializer = UserSerializer(user, many=False)
-        self.assertEqual(response.data, serializer.data)
+
+        user = User.objects.get(name="Alessandro Borges")
+
+        self.assertEqual(user.pk, 1)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
