@@ -12,7 +12,6 @@ router.register(r'tasks', views.TaskViewSet)
 schema_view = get_swagger_view(title='APIs')
 
 urlpatterns = [
+    path('', schema_view),
     path('', include(router.urls)),
-    path('apis', schema_view),
-    #path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
