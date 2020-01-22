@@ -143,3 +143,13 @@ django_heroku.settings(locals())
 #    'https://to-do-api-alessandro.herokuapp.com',
 #)
 CORS_ORIGIN_ALLOW_ALL = True
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    },
+    'USE_SESSION_AUTH': False,
+    'OPERATIONS_SORTER': 'alpha'
+}

@@ -24,6 +24,10 @@ class TaskViewSet(viewsets.ModelViewSet):
             methods=['get'],
             url_path='user/(?P<id_user>\d+)')
     def user_tasks(self, request, id_user):
+        """
+        API endpoint that list all tasks por a specific user
+        """
+
         #Validate if id_user is informed
         if id_user is None:
             return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -41,6 +45,10 @@ class TaskViewSet(viewsets.ModelViewSet):
     @action(detail=False,
             methods=['get'])
     def states(self, request):
+        """
+        API endpoint that list all possible states for the tasks
+        """
+
         serializer = StateTaskSerializer(Task.STATE_OPTIONS)
         return Response(serializer.data)
 
