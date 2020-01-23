@@ -36,6 +36,8 @@ class DetailSerializer(serializers.Serializer):
 
 class TaskUserSerializer(serializers.Serializer):
     """
-    Class used for openapi documentation
+    Class used for openapi documentation for a 400 HTTP response
     """
-    user = serializers.ListField(child=serializers.CharField())
+    user = serializers.ListField(child=serializers.CharField(), required=False)
+    description = serializers.ListField(child=serializers.CharField(), required=False)
+    state = serializers.ListField(child=serializers.CharField(), required=False)

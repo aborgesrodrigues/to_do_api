@@ -68,7 +68,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         """
         return super().list(request, *args, **kwargs)
 
-    @swagger_auto_schema(responses={400: openapi.Response("User not found", TaskUserSerializer )})
+    @swagger_auto_schema(responses={400: openapi.Response("User not found", TaskUserSerializer)})
     def create(self, request, *args, **kwargs):
         """
         API endpoint that create a task
@@ -83,7 +83,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         return super().retrieve(request, *args, **kwargs)
 
     @swagger_auto_schema(responses={404: openapi.Response("Task not found", DetailSerializer ),
-                                    400: "User not found"})
+                                    400: openapi.Response("User not found", TaskUserSerializer)})
     def update(self, request, *args, **kwargs):
         """
         API endpoint that update a specific task
@@ -91,7 +91,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         return super().update(request, *args, **kwargs)
 
     @swagger_auto_schema(responses={404: openapi.Response("Task not Found", DetailSerializer ),
-                                    400: "User not found"})
+                                    400: openapi.Response("User not found", TaskUserSerializer)})
     def partial_update(self, request, *args, **kwargs):
         """
         API endpoint that retrieve a specific task
