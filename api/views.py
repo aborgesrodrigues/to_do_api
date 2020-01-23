@@ -6,7 +6,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from api.models import User, Task
-from api.serializers import UserSerializer, TaskSerializer, StateTaskSerializer, DetailSerializer, UserTaskSerializer
+from api.serializers import UserSerializer, TaskSerializer, StateTaskSerializer, DetailSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -68,7 +68,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         """
         return super().list(request, *args, **kwargs)
 
-    @swagger_auto_schema(responses={400: openapi.Response("User not found", UserTaskSerializer )})
+    @swagger_auto_schema(responses={400: "User not found"})
     def create(self, request, *args, **kwargs):
         """
         API endpoint that create a task
