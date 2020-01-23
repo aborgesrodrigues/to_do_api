@@ -23,17 +23,19 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'description', 'state']
 
 
-class StateTaskSerializer(serializers.BaseSerializer):
+class StateTaskSerializer(serializers.Serializer):
     """
     Class responsable for serializing the states
     """
-
-    def to_representation(self, data):
-        states = []
-        for item in data:
-            states.append({"value": item[0], "label": item[1]})
-        return states
+    value = serializers.CharField()
+    label = serializers.CharField()
 
 
 class DetailSerializer(serializers.Serializer):
     detail = serializers.CharField()
+
+class TaskUserSerializer(serializers.Serializer):
+    """
+    Class used for openapi documentation
+    """
+    user = serializers.ListField(child=serializers.CharField())

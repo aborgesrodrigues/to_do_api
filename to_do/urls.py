@@ -12,7 +12,7 @@ schema_view = get_schema_view(
    openapi.Info(
       title="APIs",
       default_version='v1',
-      description="Test description"
+      description="APIs tests"
    ),
    public=True,
    permission_classes=(permissions.AllowAny,),

@@ -6,7 +6,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from api.models import User, Task
-from api.serializers import UserSerializer, TaskSerializer, StateTaskSerializer, DetailSerializer
+from api.serializers import UserSerializer, TaskSerializer, StateTaskSerializer, DetailSerializer, TaskUserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -68,7 +68,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         """
         return super().list(request, *args, **kwargs)
 
-    @swagger_auto_schema(responses={400: "User not found"})
+    @swagger_auto_schema(responses={400: openapi.Response("User not found", TaskUserSerializer )})
     def create(self, request, *args, **kwargs):
         """
         API endpoint that create a task
@@ -128,16 +128,14 @@ class TaskViewSet(viewsets.ModelViewSet):
         serializer = TaskSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    @swagger_auto_schema(responses={200: openapi.Response("", StateTaskSerializer)})
+    @swagger_auto_schema(responses={200: openapi.Response("", StateTaskSerializer(many=True))})
     @action(detail=False,
             methods=['get'])
     def states(self, request):
         """
         API endpoint that list all possible states for the tasks
         """
-
-        serializer = StateTaskSerializer(Task.STATE_OPTIONS)
-        return Response(serializer.data)
+        return Response([dict(value=item[0], label= item[1]) for item in Task.STATE_OPTIONS])
 
     queryset = Task.objects.all().order_by('description')
     serializer_class = TaskSerializer
