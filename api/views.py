@@ -11,120 +11,120 @@ from api.serializers import UserSerializer, TaskSerializer, StateTaskSerializer,
 
 class UserViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoints that allows users to be viewed or edited.
     """
     queryset = User.objects.all().order_by('name')
     serializer_class = UserSerializer
 
-    @swagger_auto_schema(operation_summary="API endpoint that retrieve all users")
+    @swagger_auto_schema(operation_summary="Retrieve all users")
     def list(self, request, *args, **kwargs):
         """
-        API endpoint that retrieve all users
+        Retrieve all users
         """
         return super().list(request, *args, **kwargs)
 
-    @swagger_auto_schema(operation_summary="API endpoint that create a user")
+    @swagger_auto_schema(operation_summary="Create a user")
     def create(self, request, *args, **kwargs):
         """
-        API endpoint that create a user
+        Create a user
         """
         return super().create(request, *args, **kwargs)
 
-    @swagger_auto_schema(operation_summary="API endpoint that retrieve a specific user",
+    @swagger_auto_schema(operation_summary="Retrieve a specific user",
                          responses={404: openapi.Response("User not Found", DetailSerializer )})
     def retrieve(self, request, *args, **kwargs):
         """
-        API endpoint that retrieve a specific user
+        Retrieve a specific user
         """
         return super().retrieve(request, *args, **kwargs)
 
-    @swagger_auto_schema(operation_summary="API endpoint that retrieve a specific user",
+    @swagger_auto_schema(operation_summary="Retrieve a specific user",
                          responses={404: openapi.Response("User not Found", DetailSerializer )})
     def update(self, request, *args, **kwargs):
         """
-        API endpoint that retrieve a specific user
+        Retrieve a specific user
         """
         return super().update(request, *args, **kwargs)
 
-    @swagger_auto_schema(operation_summary="API endpoint that retrieve a specific user",
+    @swagger_auto_schema(operation_summary="Retrieve a specific user",
                          responses={404: openapi.Response("User not Found", DetailSerializer )})
     def partial_update(self, request, *args, **kwargs):
         """
-        API endpoint that retrieve a specific user
+        Retrieve a specific user
         """
         return super().partial_update(request, *args, **kwargs)
 
-    @swagger_auto_schema(operation_summary="API endpoint that retrieve a specific user",
+    @swagger_auto_schema(operation_summary="Retrieve a specific user",
                          responses={404: openapi.Response("User not Found", DetailSerializer )})
     def destroy(self, request, *args, **kwargs):
         """
-        API endpoint that retrieve a specific user
+        Retrieve a specific user
         """
         return super().destroy(request, *args, **kwargs)
 
 
 class TaskViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows tasks to be viewed or edited.
+    API endpoints that allows tasks to be viewed or edited.
     """
 
-    @swagger_auto_schema(operation_summary="API endpoint that retrieve all tasks")
+    @swagger_auto_schema(operation_summary="Retrieve all tasks")
     def list(self, request, *args, **kwargs):
         """
-        API endpoint that retrieve all tasks
+        Retrieve all tasks
         """
         return super().list(request, *args, **kwargs)
 
-    @swagger_auto_schema(operation_summary="API endpoint that create a task",
+    @swagger_auto_schema(operation_summary="Create a task",
                          responses={400: openapi.Response("Bad Request", TaskUserSerializer)})
     def create(self, request, *args, **kwargs):
         """
-        API endpoint that create a task
+        Create a task
         """
         return super().create(request, *args, **kwargs)
 
-    @swagger_auto_schema(operation_summary="API endpoint that retrieve a specific task",
+    @swagger_auto_schema(operation_summary="Retrieve a specific task",
                          responses={404: openapi.Response("Task not found", DetailSerializer )})
     def retrieve(self, request, *args, **kwargs):
         """
-        API endpoint that retrieve a specific task
+        Retrieve a specific task
         """
         return super().retrieve(request, *args, **kwargs)
 
-    @swagger_auto_schema(operation_summary="API endpoint that update a specific task",
+    @swagger_auto_schema(operation_summary="Update a specific task",
                          responses={404: openapi.Response("Task not found", DetailSerializer ),
-                                    400: openapi.Response("User not found", TaskUserSerializer)})
+                                    400: openapi.Response("Bad Request", TaskUserSerializer)})
     def update(self, request, *args, **kwargs):
         """
-        API endpoint that update a specific task
+        Update a specific task
         """
         return super().update(request, *args, **kwargs)
 
-    @swagger_auto_schema(operation_summary="API endpoint that retrieve a specific task",
+    @swagger_auto_schema(operation_summary="Update a specific task",
                          responses={404: openapi.Response("Task not Found", DetailSerializer ),
-                                    400: openapi.Response("User not found", TaskUserSerializer)})
+                                    400: openapi.Response("Bad Request", TaskUserSerializer)})
     def partial_update(self, request, *args, **kwargs):
         """
-        API endpoint that retrieve a specific task
+        Update a specific task
         """
         return super().partial_update(request, *args, **kwargs)
 
-    @swagger_auto_schema(operation_summary= "API endpoint that delete a specific task",
+    @swagger_auto_schema(operation_summary="Delete a specific task",
                          responses={404: openapi.Response("Task not Found", DetailSerializer )})
     def destroy(self, request, *args, **kwargs):
         """
-        API endpoint that delete a specific task
+        Delete a specific task
         """
         return super().destroy(request, *args, **kwargs)
 
-    @swagger_auto_schema(operation_summary= "API endpoint that list all tasks por a specific user",
+    @swagger_auto_schema(operation_summary="List all tasks por a specific user",
                          responses={404: openapi.Response("User not found", DetailSerializer )})
     @action(detail=False,
             methods=['get'],
             url_path='user/(?P<id_user>\d+)')
     def user_tasks(self, request, id_user):
         """
-        API endpoint that list all tasks por a specific user
+        List all tasks por a specific user
         """
 
         #Validate if id_user is informed
@@ -137,17 +137,17 @@ class TaskViewSet(viewsets.ModelViewSet):
             user = User.objects.get(pk= id_user)
         except User.DoesNotExist:
             return Response(data={ "detail": "Not found." }, status=status.HTTP_404_NOT_FOUND)
-        queryset = Task.objects.filter(user= user)
+        queryset = Task.objects.filter(user=user)
         serializer = TaskSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    @swagger_auto_schema(operation_summary= "API endpoint that list all possible states for the tasks",
+    @swagger_auto_schema(operation_summary= "List all possible states for the tasks",
                          responses={200: openapi.Response("", StateTaskSerializer(many=True))})
     @action(detail=False,
             methods=['get'])
     def states(self, request):
         """
-        API endpoint that list all possible states for the tasks
+        List all possible states for the tasks
         """
         return Response([dict(value=item[0], label= item[1]) for item in Task.STATE_OPTIONS])
 
