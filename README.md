@@ -3,7 +3,7 @@ TO DO API
 
 This api allows create users and tasks.
 
-<img src="endpoints.png.png" style="width: 70%;"/>
+<img src="endpoints.png" style="width: 70%;"/>
     
     
 ## Building
