@@ -2,7 +2,6 @@ from django.test import TestCase, Client
 
 # Create your tests here.
 from rest_framework import status
-from rest_framework.reverse import reverse
 
 from api.models import User, Task
 from api.serializers import UserSerializer, TaskSerializer

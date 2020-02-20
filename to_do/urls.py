@@ -19,8 +19,8 @@ schema_view = get_schema_view(
 )
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'tasks', views.TaskViewSet)
+router.register(r'users', views.UserViewSet, base_name='users')
+router.register(r'tasks', views.TaskViewSet, base_name='tasks')
 
 urlpatterns = [
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
