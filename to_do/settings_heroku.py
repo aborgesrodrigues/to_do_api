@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'drf_yasg',
     'corsheaders',
-    'rest_framework_swagger',
     'api',
 ]
 
@@ -77,10 +77,7 @@ TEMPLATES = [
     },
 ]
 
-REST_FRAMEWORK = {
-
-}
-
+REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
 
 WSGI_APPLICATION = 'to_do.wsgi.application'
 
