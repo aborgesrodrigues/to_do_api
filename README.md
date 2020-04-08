@@ -3,6 +3,8 @@ TO DO API
 
 This api allows create users and tasks.
 
+It is possible to see this project deployed in the [Heroku server](https://to-do-api-alessandro.herokuapp.com/).
+
 <img src="endpoints.png" style="width: 70%;"/>
     
     
