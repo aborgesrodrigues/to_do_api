@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +24,7 @@ PROJECT_PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 SECRET_KEY = '((rir2k9q%s6ea0-9k1m@l^8#@&jk@&amjbu3cag*$jr@^(j6-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -78,7 +79,6 @@ TEMPLATES = [
 
 REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
 
-
 WSGI_APPLICATION = 'to_do.wsgi.application'
 
 
@@ -132,6 +132,9 @@ USE_TZ = True
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
 
 #CORS_ORIGIN_WHITELIST = (
 #    'https://to-do-api-alessandro.herokuapp.com',
