@@ -1,0 +1,25 @@
+version: "3.8"
+services: # the different images that will be running as containers
+  nginx: # service name
+# location of the dockerfile that defines the nginx image. The dockerfile will be used to spin up an image during the build stage.
+    build: ./nginx 
+# map the machine port 1339 to the container port 80. Any traffic from 1339 externally will be passed to port 80 of the NGINX container. You can access this container viea localhost:1339
+    ports: 
+      - "1339:80"
+    volumes:  
+      - static_volume:/root/work/to_do/static 
+    depends_on: 
+      - app 
+    restart: "on-failure" 
+  app:
+    build:
+      context: .
+      dockerfile: local.Dockerfile
+    ports:
+      - "8000:8000"
+    volumes: 
+      - .:/root/work
+      - static_volume:/root/work/to_do/static 
+
+volumes:
+  static_volume:

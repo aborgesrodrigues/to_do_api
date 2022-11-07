@@ -5,5 +5,5 @@ django-cors-headers==3.2.0
 drf-yasg==1.17.0
 
 #Heroku libraries
-#gunicorn
+gunicorn==19.9.0
 #django-heroku
