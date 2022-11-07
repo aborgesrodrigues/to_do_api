@@ -1,9 +1,9 @@
-Django==3.0.3
-djangorestframework==3.10.3
-djangorestframework-jwt==1.11.0
-django-cors-headers==3.2.0
-drf-yasg==1.17.0
+Django
+djangorestframework
+djangorestframework-jwt
+django-cors-headers
+drf-yasg
+gunicorn
 
 #Heroku libraries
-gunicorn==19.9.0
 django-heroku
